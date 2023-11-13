@@ -23,7 +23,17 @@
     </header>
     <main class="container">
       <div data-view="entry-form">
-        <h2>New Entry</h2>
+        <form class="new-entry">
+          <h2>New Entry</h2>
+          <img src="./images/placeholder-image-square.jpg" alt="placeholder" />
+          <label for="title">Title</label><br />
+          <input type="text" id="title" /><br />
+          <label for="photo-url">Photo URL</label><br />
+          <input type="url" id="photo-url" /><br />
+          <label for="notes">Notes</label><br />
+          <textarea id="notes" rows="5"></textarea>
+          <div class="save"><h3>SAVE</h3></div>
+        </form>
       </div>
       <div data-view="entries" class="hidden"></div>
     </main>
