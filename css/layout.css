@@ -31,4 +31,8 @@
   .column-half {
     width: 50%;
   }
+
+  #code-journal {
+    font-size: 1rem;
+  }
 }
