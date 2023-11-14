@@ -7,9 +7,12 @@ const data = {
   nextEntryId: 1,
 };
 console.log(data);
-window.addEventListener('beforeunload', handleBeforeunload);
+window.addEventListener('beforeunload', function (event) {
+  const entriesJSON = JSON.stringify(data.entries);
+  localStorage.setItem('javascript-local-storage', entriesJSON);
+});
 
-function handleBeforeunload(data) {
-  const dataJSON = JSON.stringify(data);
-  localStorage.setItem(dataJSON);
+const previousEntriesJSON = localStorage.getItem('javascript-local-storage');
+if (previousEntriesJSON !== null) {
+  data.entries = JSON.parse(previousEntriesJSON);
 }
