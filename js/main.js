@@ -6,6 +6,8 @@ const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
 const $entryForm = document.querySelector('.new-entry-form');
 const $entriesList = document.querySelector('.entries-list');
+const $newEntryView = document.querySelector('#new-entry-view');
+const $entriesView = document.querySelector('#entries');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.src = $photoUrl.value;
@@ -84,4 +86,16 @@ function toggleNoEntries() {
   }
 }
 
+function viewSwap(view) {
+  data.view = view;
+  if (view === 'entries') {
+    $newEntryView.setAttribute('class', 'hidden');
+    $entriesView.removeAttribute('class');
+  } else if (view === 'entry-form') {
+    $entriesView.setAttribute('class', 'hidden');
+    $newEntryView.removeAttribute('class');
+  }
+}
+
+viewSwap();
 toggleNoEntries();
