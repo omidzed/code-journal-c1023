@@ -36,24 +36,30 @@ function renderEntry(entry) {
   const $columnFull = document.createElement('div');
   $columnFull.setAttribute('class', 'column-full');
 
-  const $columnHalf = document.createElement('div');
-  $columnHalf.setAttribute('class', 'column-half');
+  const $columnHalfOne = document.createElement('div');
+  $columnHalfOne.setAttribute('class', 'column-half');
+
+  const $columnHalfTwo = document.createElement('div');
+  $columnHalfTwo.setAttribute('class', 'column-half');
 
   const $entryPhoto = document.createElement('img');
   $entryPhoto.setAttribute('class', 'entry-photo');
+  $entryPhoto.setAttribute('src', entry.photoUrl);
 
   const $h3 = document.createElement('h3');
-  $h3.setAttribute('class', 'entry-photo');
+  $h3.setAttribute('class', 'title');
+  $h3.textContent = entry.title;
 
   const $paragraph = document.createElement('p');
   $paragraph.setAttribute('class', 'entries-text');
+  $paragraph.textContent = entry.notes;
 
   $listItem.appendChild($row);
-  $row.appendChild($columnHalf);
-  $columnHalf.appendChild($entryPhoto);
-  $row.appendChild($columnHalf);
-  $columnHalf.appendChild($h3);
-  $columnHalf.appendChild($paragraph);
+  $row.appendChild($columnHalfOne);
+  $columnHalfOne.appendChild($entryPhoto);
+  $row.appendChild($columnHalfTwo);
+  $columnHalfTwo.appendChild($h3);
+  $columnHalfTwo.appendChild($paragraph);
 
   return $listItem;
 }
@@ -61,9 +67,21 @@ function renderEntry(entry) {
 document.addEventListener('DOMContentLoaded', function (event) {
   const entries = data.entries;
 
-  for (let i = 0; i < entries.length; i++) {
-    const $entry = renderEntry(entries[i]);
-    $entriesList.appendChild($entry);
+  for (let i = 0; i < entries.length; ) {
+    const entry = renderEntry(entries[i]);
+    $entriesList.appendChild(entry);
     i++;
   }
+  return $entriesList;
 });
+
+function toggleNoEntries() {
+  const $noEntries = document.querySelector('.no-entries');
+  if (data.entries.length > 0) {
+    $noEntries.setAttribute('class', 'no-entries hidden');
+  } else {
+    $noEntries.setAttribute('class', 'no-entries');
+  }
+}
+
+toggleNoEntries();
