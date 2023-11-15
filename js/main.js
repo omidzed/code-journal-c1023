@@ -35,7 +35,7 @@ function submitHandler(event) {
     photoUrl: $photoUrl.value,
   };
 
-  data.entries.push(entry);
+  data.entries.unshift(entry);
   data.nextEntryId++;
   $photoPreview.src = 'images/placeholder-image-square.jpg';
   $entriesList.prepend(renderEntry(entry));
@@ -63,6 +63,7 @@ function renderEntry(entry) {
   const $entryPhoto = document.createElement('img');
   $entryPhoto.setAttribute('class', 'entry-photo');
   $entryPhoto.setAttribute('src', entry.photoUrl);
+  $entryPhoto.setAttribute('alt', 'entry-photo');
 
   const $h3 = document.createElement('h3');
   $h3.setAttribute('class', 'title');
