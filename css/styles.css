@@ -6,6 +6,8 @@ header {
   align-items: center;
   padding: 2rem;
   gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
 h1 {
