@@ -44,3 +44,17 @@ button {
   font-size: 0.7rem;
   border-radius: 3px;
 }
+
+ul {
+  display: inline;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+}
+
+#entries {
+  padding: 0 2rem;
+  max-width: 100%;
+}
