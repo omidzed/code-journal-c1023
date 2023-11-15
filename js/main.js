@@ -5,6 +5,7 @@ const $photoPreview = document.querySelector('#photo-preview');
 const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
 const $entryForm = document.querySelector('.new-entry-form');
+const $entriesList = document.querySelector('.entries-list');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.src = $photoUrl.value;
@@ -57,4 +58,12 @@ function renderEntry(entry) {
   return $listItem;
 }
 
-renderEntry();
+document.addEventListener('DOMContentLoaded', function (event) {
+  const entries = data.entries;
+
+  for (let i = 0; i < entries.length; i++) {
+    const $entry = renderEntry(entries[i]);
+    $entriesList.appendChild($entry);
+    i++;
+  }
+});
