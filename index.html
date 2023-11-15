@@ -30,9 +30,9 @@
     </header>
 
     <main class="container">
-      <div data-view="entry-form">
-        <form class="new-entry">
-          <div class="column-full"><h2>New Entry</h2></div>
+      <div data-view="entry-form" class="entry-form">
+        <div class="column-full"><h2>New Entry</h2></div>
+        <form class="new-entry-form">
           <div class="row">
             <div class="column-half">
               <img
@@ -56,22 +56,25 @@
           </div>
         </form>
       </div>
-      <div data-view="entries" class="hidden">
+
+      <div data-view="entries" class="entries">
         <div class="row">
-          <h2>Entries</h2>
+          <div class="column-full">
+            <h2>Entries</h2>
+          </div>
         </div>
 
-        <ul>
-          <li>
+        <ul class="entries-list">
+          <li class="list-item">
             <div class="row">
               <div class="column-half">
                 <img
-                  id="photo-preview2"
+                  class="entry-photo"
                   src="https://i0.wp.com/www.roeselienraimond.com/wp-content/uploads/2014/02/roeselien_fineart.jpg?w=526&ssl=1"
                   alt="placeholder2" />
               </div>
               <div class="column-half">
-                <h2>Title</h2>
+                <h3>Title</h3>
                 <p class="entries-text">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
                   tempora, at numquam, reprehenderit laborum repellat deleniti
