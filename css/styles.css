@@ -1,15 +1,43 @@
 header {
   background-color: rgb(76, 36, 116);
   color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
 }
 
 h1 {
-  margin: 0 auto;
-  padding: 1.5rem;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+a {
+  font-size: 1.1rem;
+  display: inline;
+  cursor: pointer;
+}
+
+.new-anchor {
+  display: flex;
+  color: white;
+  border: 1px inset rgb(6, 3, 9);
+  background-color: rgb(76, 36, 116);
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  align-items: center;
 }
 
 img {
   width: 100%;
+}
+
+.entries-new {
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
 }
 
 .new-entry {
@@ -34,14 +62,17 @@ label {
 .save {
   display: flex;
   justify-content: end;
+  margin-bottom: 2rem;
+  padding: 0;
 }
 
 button {
   color: white;
   background-color: rgb(76, 36, 116);
-  padding: 0.4rem 0.6rem;
-  font-size: 0.7rem;
-  border-radius: 3px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  margin: 0;
 }
 
 ul {
