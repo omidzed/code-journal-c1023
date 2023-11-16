@@ -9,19 +9,27 @@ const $noEntries = document.querySelector('.no-entries');
 const $entriesAnchor = document.querySelector('.entries-anchor');
 const $views = document.querySelectorAll('.view-container');
 const $newAnchor = document.querySelector('.new-anchor');
-
+const $H2element = document.querySelector('#h2-new-entry');
 const $entriesList = document.querySelector('.entries-list');
-console.log($entriesList);
 
-// $entriesList.addEventListener('click', function (event) {
-//   viewSwap('entry-form');
-//   const listItemz = event.target.closest('li');
-//   for (let i = 0; i < data.entries.length; i++){
-//     if (data.entries[i].entryId === listItemz.entryId) {
+$entriesList.addEventListener('click', editIconHandler);
 
-//      }
-//   }
-// });
+function editIconHandler(event) {
+  const listItem = event.target.closest('li');
+  for (let index = 0; index < data.entries.length; index++) {
+    if (
+      data.entries[index].entryId === listItem.getAttribute('data-entry-id')
+    ) {
+      data.editing = data.entries.splice(index, 1)[0];
+    }
+    viewSwap('entry-form');
+    $H2element.textContent = 'Edit Entry';
+    $title.value = data.editing.title;
+    $photoUrl.value = data.editing.photoUrl;
+    $notes.value = data.editing.notes;
+    $photoPreview.src = data.editing.photoUrl.value;
+  }
+}
 
 $newAnchor.addEventListener('click', function (event) {
   viewSwap('entry-form');
@@ -59,7 +67,7 @@ function submitHandler(event) {
 function renderEntry(entry) {
   const $listItem = document.createElement('li');
   $listItem.setAttribute('class', 'list-item');
-  $listItem.setAttribute('data-entry-id', 'entry.entryId');
+  $listItem.setAttribute('data-entry-id', entry.entryId);
 
   const $row = document.createElement('div');
   $row.setAttribute('class', 'row');
@@ -111,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     const entry = renderEntry($entries[i]);
     $entriesList.appendChild(entry);
   }
-  // return $entriesList;
   viewSwap(data.view);
   toggleNoEntries();
 });
