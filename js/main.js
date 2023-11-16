@@ -25,6 +25,7 @@ $photoUrl.addEventListener('input', function (event) {
 });
 
 $entriesList.addEventListener('click', editIconHandler);
+$entryForm.addEventListener('submit', submitHandler);
 
 function editIconHandler(event) {
   const listItem = event.target.closest('li');
@@ -43,25 +44,30 @@ function editIconHandler(event) {
   }
 }
 
-$entryForm.addEventListener('submit', submitHandler);
-
 function submitHandler(event) {
-  event.preventDefault();
+  if (data.editing === null) {
+    event.preventDefault();
 
-  const entry = {
-    entryId: data.nextEntryId,
-    title: $title.value,
-    notes: $notes.value,
-    photoUrl: $photoUrl.value,
-  };
+    const entry = {
+      entryId: data.nextEntryId,
+      title: $title.value,
+      notes: $notes.value,
+      photoUrl: $photoUrl.value,
+    };
 
-  data.entries.unshift(entry);
-  data.nextEntryId++;
-  $photoPreview.src = 'images/placeholder-image-square.jpg';
-  $entriesList.prepend(renderEntry(entry));
-  $entryForm.reset();
-  viewSwap('entries');
-  toggleNoEntries();
+    data.entries.unshift(entry);
+    data.nextEntryId++;
+    $photoPreview.src = 'images/placeholder-image-square.jpg';
+    $entriesList.prepend(renderEntry(entry));
+    $entryForm.reset();
+    viewSwap('entries');
+    toggleNoEntries();
+  } else {
+    data.entry.entryId = data.editing.entryId;
+    $entriesList.replace(renderEntry(data.entry));
+    data.editing = null;
+    $H2element.textContent = 'New Entry';
+  }
 }
 
 function renderEntry(entry) {
