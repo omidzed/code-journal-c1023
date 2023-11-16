@@ -114,7 +114,6 @@ function renderEntry(entry) {
   $rowTitlePencil.appendChild($h3);
   $rowTitlePencil.appendChild($iconPencil);
   $columnHalfTwo.appendChild($paragraph);
-  console.log('$listItem: ', $listItem);
   return $listItem;
 }
 
