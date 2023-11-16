@@ -32,6 +32,23 @@ a {
   align-items: center;
 }
 
+.fa-pen {
+  color: rgb(76, 36, 116);
+}
+
+.title-pencil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a:link,
+a:visited {
+  background-color: rgb(76, 36, 116);
+  text-decoration: none;
+  color: white;
+}
+
 img {
   width: 100%;
 }

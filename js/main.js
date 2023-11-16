@@ -5,11 +5,23 @@ const $photoPreview = document.querySelector('#photo-preview');
 const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
 const $entryForm = document.querySelector('.new-entry-form');
-const $entriesList = document.querySelector('.entries-list');
 const $noEntries = document.querySelector('.no-entries');
 const $entriesAnchor = document.querySelector('.entries-anchor');
 const $views = document.querySelectorAll('.view-container');
 const $newAnchor = document.querySelector('.new-anchor');
+
+const $entriesList = document.querySelector('.entries-list');
+console.log($entriesList);
+
+// $entriesList.addEventListener('click', function (event) {
+//   viewSwap('entry-form');
+//   const listItemz = event.target.closest('li');
+//   for (let i = 0; i < data.entries.length; i++){
+//     if (data.entries[i].entryId === listItemz.entryId) {
+
+//      }
+//   }
+// });
 
 $newAnchor.addEventListener('click', function (event) {
   viewSwap('entry-form');
@@ -47,6 +59,7 @@ function submitHandler(event) {
 function renderEntry(entry) {
   const $listItem = document.createElement('li');
   $listItem.setAttribute('class', 'list-item');
+  $listItem.setAttribute('data-entry-id', 'entry.entryId');
 
   const $row = document.createElement('div');
   $row.setAttribute('class', 'row');
@@ -69,6 +82,12 @@ function renderEntry(entry) {
   $h3.setAttribute('class', 'title');
   $h3.textContent = entry.title;
 
+  const $rowTitlePencil = document.createElement('div');
+  $rowTitlePencil.setAttribute('class', '.row title-pencil');
+
+  const $iconPencil = document.createElement('i');
+  $iconPencil.setAttribute('class', 'fa-solid fa-pen');
+
   const $paragraph = document.createElement('p');
   $paragraph.setAttribute('class', 'entries-text');
   $paragraph.textContent = entry.notes;
@@ -77,9 +96,11 @@ function renderEntry(entry) {
   $row.appendChild($columnHalfOne);
   $columnHalfOne.appendChild($entryPhoto);
   $row.appendChild($columnHalfTwo);
-  $columnHalfTwo.appendChild($h3);
+  $columnHalfTwo.appendChild($rowTitlePencil);
+  $rowTitlePencil.appendChild($h3);
+  $rowTitlePencil.appendChild($iconPencil);
   $columnHalfTwo.appendChild($paragraph);
-
+  console.log('$listItem: ', $listItem);
   return $listItem;
 }
 
