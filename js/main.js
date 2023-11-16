@@ -12,25 +12,6 @@ const $newAnchor = document.querySelector('.new-anchor');
 const $H2element = document.querySelector('#h2-new-entry');
 const $entriesList = document.querySelector('.entries-list');
 
-$entriesList.addEventListener('click', editIconHandler);
-
-function editIconHandler(event) {
-  const listItem = event.target.closest('li');
-  for (let index = 0; index < data.entries.length; index++) {
-    if (
-      data.entries[index].entryId === listItem.getAttribute('data-entry-id')
-    ) {
-      data.editing = data.entries.splice(index, 1)[0];
-    }
-    viewSwap('entry-form');
-    $H2element.textContent = 'Edit Entry';
-    $title.value = data.editing.title;
-    $photoUrl.value = data.editing.photoUrl;
-    $notes.value = data.editing.notes;
-    $photoPreview.src = data.editing.photoUrl.value;
-  }
-}
-
 $newAnchor.addEventListener('click', function (event) {
   viewSwap('entry-form');
 });
@@ -42,6 +23,25 @@ $entriesAnchor.addEventListener('click', function (event) {
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.src = $photoUrl.value;
 });
+
+$entriesList.addEventListener('click', editIconHandler);
+
+function editIconHandler(event) {
+  const listItem = event.target.closest('li');
+  viewSwap('entry-form');
+  for (let i = 0; i < data.entries.length; i++) {
+    if (
+      data.entries[i].entryId === Number(listItem.getAttribute('data-entry-id'))
+    ) {
+      data.editing = data.entries[i];
+    }
+    $H2element.textContent = 'Edit Entry';
+    $title.value = data.editing.title;
+    $photoUrl.value = data.editing.photoUrl;
+    $notes.value = data.editing.notes;
+    $photoPreview.src = $photoUrl.value;
+  }
+}
 
 $entryForm.addEventListener('submit', submitHandler);
 
