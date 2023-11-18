@@ -79,19 +79,24 @@ function renderEntry(entry) {
 }
 
 function editIconHandler(event) {
-  const listItem = event.target.closest('li');
-  viewSwap('entry-form');
-  for (let i = 0; i < data.entries.length; i++) {
-    if (
-      data.entries[i].entryId === Number(listItem.getAttribute('data-entry-id'))
-    ) {
-      data.editing = data.entries[i];
+  if (event.target.tagName === 'I') {
+    const $listItem = event.target.closest('li');
+    console.log($listItem);
+    console.dir($listItem);
+    viewSwap('entry-form');
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        data.entries[i].entryId ===
+        Number($listItem.getAttribute('data-entry-id'))
+      ) {
+        data.editing = data.entries[i];
+      }
+      $H2element.textContent = 'Edit Entry';
+      $title.value = data.editing.title;
+      $photoUrl.value = data.editing.photoUrl;
+      $notes.value = data.editing.notes;
+      $photoPreview.src = $photoUrl.value;
     }
-    $H2element.textContent = 'Edit Entry';
-    $title.value = data.editing.title;
-    $photoUrl.value = data.editing.photoUrl;
-    $notes.value = data.editing.notes;
-    $photoPreview.src = $photoUrl.value;
   }
 }
 
@@ -121,7 +126,6 @@ function submitHandler(event) {
       if (Number(dataEntryId) === data.editing.entryId) {
         data.entries[i] = entry;
         $listItems[i].replaceWith(renderEntry(entry));
-        break;
       }
     }
     data.editing = null;
