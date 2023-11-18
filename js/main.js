@@ -81,7 +81,8 @@ function renderEntry(entry) {
 function editIconHandler(event) {
   if (event.target.tagName === 'I') {
     const $listItem = event.target.closest('li');
-    console.log($listItem);
+    console.log('li clicked', $listItem);
+    console.log('data.editing:', data.editing);
     console.dir($listItem);
     viewSwap('entry-form');
     for (let i = 0; i < data.entries.length; i++) {
