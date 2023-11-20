@@ -81,24 +81,23 @@ function renderEntry(entry) {
 function editIconHandler(event) {
   if (event.target.tagName === 'I') {
     const $listItem = event.target.closest('li');
-    console.log('li clicked', $listItem);
-    console.log('data.editing:', data.editing);
-    console.dir($listItem);
-    viewSwap('entry-form');
+
     for (let i = 0; i < data.entries.length; i++) {
       if (
-        data.entries[i].entryId ===
+        Number(data.entries[i].entryId) ===
         Number($listItem.getAttribute('data-entry-id'))
       ) {
         data.editing = data.entries[i];
+
+        $H2element.textContent = 'Edit Entry';
+        $title.value = data.editing.title;
+        $photoUrl.value = data.editing.photoUrl;
+        $notes.value = data.editing.notes;
+        $photoPreview.src = $photoUrl.value;
       }
-      $H2element.textContent = 'Edit Entry';
-      $title.value = data.editing.title;
-      $photoUrl.value = data.editing.photoUrl;
-      $notes.value = data.editing.notes;
-      $photoPreview.src = $photoUrl.value;
     }
   }
+  viewSwap('entry-form');
 }
 
 function submitHandler(event) {
