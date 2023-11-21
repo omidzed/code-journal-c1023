@@ -11,6 +11,10 @@ const $views = document.querySelectorAll('.view-container');
 const $newAnchor = document.querySelector('.new-anchor');
 const $H2element = document.querySelector('#h2-new-entry');
 const $entriesList = document.querySelector('.entries-list');
+const $delete = document.querySelector('#delete-anchor');
+const $modal = document.querySelector('.modal-container');
+const $cancel = document.querySelector('.cancel');
+const $confirm = document.querySelector('.confirm');
 
 function viewSwap(targetView) {
   for (let i = 0; i < $views.length; i++) {
@@ -78,28 +82,6 @@ function renderEntry(entry) {
   return $listItem;
 }
 
-function editIconHandler(event) {
-  if (event.target.tagName === 'I') {
-    const $listItem = event.target.closest('li');
-
-    for (let i = 0; i < data.entries.length; i++) {
-      if (
-        Number(data.entries[i].entryId) ===
-        Number($listItem.getAttribute('data-entry-id'))
-      ) {
-        data.editing = data.entries[i];
-
-        $H2element.textContent = 'Edit Entry';
-        $title.value = data.editing.title;
-        $photoUrl.value = data.editing.photoUrl;
-        $notes.value = data.editing.notes;
-        $photoPreview.src = $photoUrl.value;
-      }
-    }
-  }
-  viewSwap('entry-form');
-}
-
 function submitHandler(event) {
   event.preventDefault();
   const entry = {
@@ -137,6 +119,36 @@ function submitHandler(event) {
   }
 }
 
+function editIconHandler(event) {
+  if (event.target.tagName === 'I') {
+    const $listItem = event.target.closest('li');
+
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        Number(data.entries[i].entryId) ===
+        Number($listItem.getAttribute('data-entry-id'))
+      ) {
+        data.editing = data.entries[i];
+
+        $H2element.textContent = 'Edit Entry';
+        $title.value = data.editing.title;
+        $photoUrl.value = data.editing.photoUrl;
+        $notes.value = data.editing.notes;
+        $photoPreview.src = $photoUrl.value;
+      }
+    }
+    viewSwap('entry-form');
+  }
+}
+
+function deleteHandler(event) {
+  $modal.classList.remove('hidden');
+}
+
+function cancelHandler(event) {
+  $modal.classList.add('hidden');
+}
+
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.src = $photoUrl.value;
 });
@@ -151,6 +163,8 @@ $entriesAnchor.addEventListener('click', function (event) {
 
 $entriesList.addEventListener('click', editIconHandler);
 $entryForm.addEventListener('submit', submitHandler);
+$delete.addEventListener('click', deleteHandler);
+$cancel.addEventListener('click', cancelHandler);
 
 document.addEventListener('DOMContentLoaded', function (event) {
   const $entries = data.entries;
@@ -160,5 +174,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $entriesList.appendChild(entry);
   }
   viewSwap(data.view);
+  toggleNoEntries();
+});
+
+$confirm.addEventListener('click', function (event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.editing.entryId === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+    }
+  }
+  viewSwap('entries');
   toggleNoEntries();
 });
