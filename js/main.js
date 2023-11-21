@@ -183,6 +183,7 @@ $confirm.addEventListener('click', function (event) {
       data.entries.splice(i, 1);
     }
   }
+  $modal.classList.add('hidden');
   viewSwap('entries');
   toggleNoEntries();
 });
