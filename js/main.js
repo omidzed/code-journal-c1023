@@ -15,6 +15,7 @@ const $delete = document.querySelector('#delete-anchor');
 const $modal = document.querySelector('.modal-container');
 const $cancel = document.querySelector('.cancel');
 const $confirm = document.querySelector('.confirm');
+const $listItem = document.querySelector('.list-item');
 
 function viewSwap(targetView) {
   for (let i = 0; i < $views.length; i++) {
@@ -138,15 +139,8 @@ function editIconHandler(event) {
       }
     }
     viewSwap('entry-form');
+    return $listItem;
   }
-}
-
-function deleteHandler(event) {
-  $modal.classList.remove('hidden');
-}
-
-function cancelHandler(event) {
-  $modal.classList.add('hidden');
 }
 
 $photoUrl.addEventListener('input', function (event) {
@@ -177,12 +171,21 @@ document.addEventListener('DOMContentLoaded', function (event) {
   toggleNoEntries();
 });
 
+function deleteHandler(event) {
+  $modal.classList.remove('hidden');
+}
+
+function cancelHandler(event) {
+  $modal.classList.add('hidden');
+}
+
 $confirm.addEventListener('click', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     if (data.editing.entryId === data.entries[i].entryId) {
       data.entries.splice(i, 1);
     }
   }
+  $listItem.remove();
   $modal.classList.add('hidden');
   viewSwap('entries');
   toggleNoEntries();
