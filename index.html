@@ -30,7 +30,7 @@
 
     <main class="container">
       <div data-view="entry-form" class="view-container">
-        <div class="row">
+        <div class="column-full">
           <h2 id="h2-new-entry">New Entry</h2>
         </div>
 
@@ -55,7 +55,11 @@
               <textarea id="notes" rows="5" required></textarea>
             </div>
           </div>
-          <div class="save container">
+          <div class="save container hidden">
+            <button>SAVE</button>
+          </div>
+          <div class="save-delete container">
+            <a id="delete-anchor" href="#">Delete Entry</a>
             <button>SAVE</button>
           </div>
         </form>
@@ -70,7 +74,18 @@
         <ul class="entries-list"></ul>
       </div>
     </main>
-
+    <div class="modal-container hidden">
+      <div class="overlay"></div>
+      <div class="modal">
+        <p class="delete-message">
+          Are you sure you want to delete this entry?
+        </p>
+        <div class="column full modal-row">
+          <button class="cancel">CANCEL</button>
+          <button class="confirm">CONFIRM</button>
+        </div>
+      </div>
+    </div>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>
